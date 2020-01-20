@@ -125,7 +125,7 @@ void Separator(string expression, string str, FileHandler *filehandler, int *cat
         }
     }
 }
-
+//Changes based on the str actions and returns the proper string
 string Choice(string str, int *catergory)
 {
     int i;
