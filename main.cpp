@@ -16,15 +16,15 @@
 
 using namespace std;
 extern int DEBUG;
-void FindTree(Node *hd, string str, int catergory); // Finds where to add the data in the tree
-void FindTree(Node *hd, Node *str, int catergory);  // Finds where to add the data in the tree
-void TraverseTree(Node *hd);                        // Goes through the tree to make a singly linked list
-Node *TraverseTreeHelper(Node *hd, Node *list);     // Makes the singly linked list
-Node *OrderTree(Node *hd, int catergory);           // Changes the order of the tree
-string Choice(string str, int *catergory);          // Determines the choices from the users
-string PrintList(Node *list);                       // Does in order and makes a string of the nodes' data
-void Scheduler(FileHandler *filehandler);           // The scheduler for the priority of tasks that need to be done to the data
-void Separtor(string expression, string x);
+void FindTree(Node *hd, string str, int catergory);                                    // Finds where to add the data in the tree
+void FindTree(Node *hd, Node *str, int catergory);                                     // Finds where to add the data in the tree
+void TraverseTree(Node *hd);                                                           // Goes through the tree to make a singly linked list
+Node *TraverseTreeHelper(Node *hd, Node *list);                                        // Makes the singly linked list
+Node *OrderTree(Node *hd, int catergory);                                              // Changes the order of the tree
+string Choice(string str, int *catergory);                                             // Determines the choices from the users
+string PrintList(Node *list);                                                          // Does in order and makes a string of the nodes' data
+void Scheduler(FileHandler *filehandler);                                              // The scheduler for the priority of tasks that need to be done to the data
+void Separator(string expression, string x, FileHandler *filehandler, int *catergory); // Separators for imports
 /*
     This is a directory with phone, addresses, first and last name. Accessible in different forms.
     Can add, update, and delete records. Have the ability to export to a file or stdout.
@@ -72,11 +72,11 @@ void Scheduler(FileHandler *filehandler)
             str = str.substr(7);
             if (str.substr(0, 4).find("file") == 0)
             {
-                Separtor("file", str.substr(4));
+                Separator("file", str.substr(4), filehandler, &catergory);
             }
             else if (str.substr(0, 3).find("add") == 0)
             {
-                Separtor("add", str.substr(3));
+                Separator("add", str.substr(3), filehandler, &catergory);
             }
         }
         if (str.substr(0, 6).find("export") == 0)
@@ -94,13 +94,35 @@ void Scheduler(FileHandler *filehandler)
         }
     }
 }
+/*
+    input: import file("text", "...") or import add("..", "....")
+*/
 
-void Separtor(string expression, string str)
+//TODO: Needs testing
+void Separator(string expression, string str, FileHandler *filehandler, int *catergory)
 {
     int cur = 0;
-    for(cur = 0; cur < str.length(); cur++)
+    int content = 0; // Goes to true if at the end of the possible indexing
+    int temp = 0;
+    for (cur = 0; cur < str.length(); cur++)
     {
-        
+        if (str.at(cur) == '"')
+        {
+            content++;
+            if (content % 2)
+                temp = cur;
+        }
+        if (content > 0 && !(content % 2) && expression.compare("file"))
+        {
+            filehandler->AddFile(str.substr((temp + 1), cur), str.substr((temp + 1), cur).length(), 0);
+            str = str.substr(cur);
+            temp = 0;
+        }
+        else if (content > 0 && !(content % 2) && expression.compare("add"))
+        {
+            FindTree(head, str.substr((temp + 1), cur), *catergory);
+            str = str.substr(cur);
+        }
     }
 }
 
