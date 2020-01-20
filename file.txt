@@ -1,0 +1,13 @@
+add Tom Petty 12345678 3330 N Address Road
+add Scott S 123456 9999 N AZ Street
+add Billy B 12345677 00000 N Grim Street
+export
+order phone
+export
+order first
+export
+order address
+add Z Y 00000000 0009 S Mandy Lane
+export test.txt
+file file.txt
+exit
