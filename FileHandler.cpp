@@ -53,9 +53,10 @@ Connector *FileHandler::AccessCurLoc()
 // Return "" if it is no files left over and file is at EOF else return the line from the file
 string FileHandler::CheckCurLoc()
 {
+    string str;
+    int i;
     if (!this->hasFile())
         return "";
-    string str;
     if (CurLoc->infile.eof())
     {
         ChangeCurLoc();
