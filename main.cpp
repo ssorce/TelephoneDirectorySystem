@@ -137,7 +137,7 @@ void Separator(string expression, string str, FileHandler *filehandler, int *cat
 string Choice(string str, int *catergory)
 {
     int i;
-    DEBUG(str);
+    DEBUG(str); // DEBUG statement
     i = str.substr(0, 5).find("close");
     if (i == 0)
         return str;
@@ -205,6 +205,7 @@ void TraverseTree(Node *hd)
 }
 
 // Changes the order of the tree based on the catergory
+// TODO: Have to get it to make a tree based on the similar information
 Node *OrderTree(Node *old, int catergory)
 {
     old = TraverseTreeHelper(old, NULL);
@@ -253,7 +254,7 @@ string PrintList(Node *hd)
     return returnValue;
 }
 
-// Wheere the new node should be in the tree
+// Where the new node should be in the tree
 void FindTree(Node *hd, string str, int catergory)
 {
     Node *node = new Node(str);
@@ -268,6 +269,22 @@ void FindTree(Node *hd, string str, int catergory)
         }
         else if (i < 0 && hd->right == NULL)
         {
+            hd->right = node;
+            return;
+        }
+        else if (i == 0) // TODO: This may not work in all cases, needs testing
+        {
+            for (i = 0; i < 4; i++)
+            {
+                if (hd->getCatergory(i).compare(node->getCatergory(i))) // not equal breaks
+                    break;
+            } //Check if this is a dup
+            if (i == 4)
+                return;
+            else if (hd->right != NULL)
+            {
+                node->right = hd->right;
+            }
             hd->right = node;
             return;
         }

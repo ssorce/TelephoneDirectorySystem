@@ -9,4 +9,7 @@ export
 order address
 add Z Y 00000000 0009 S Mandy Lane
 file file.txt
+add Tilly B 12345677 00000 N Grim Street
+add Nilly B 12345677 00000 N Grim Street
+add Ailly B 12345677 00000 N Grim Street
 exit
