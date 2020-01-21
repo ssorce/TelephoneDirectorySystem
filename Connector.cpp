@@ -2,6 +2,10 @@
 
 Connector::~Connector()
 {
+    if(this->fileType)
+        this->infile.close();
+    else
+        this->outfile.close();
     free(this->fileName);
 }
 

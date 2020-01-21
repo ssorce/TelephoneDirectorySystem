@@ -28,20 +28,55 @@ void FileHandler::ChangeCurLoc()
     CurLoc = CurLoc->next;
 }
 
+//Closes a specific file
+void FileHandler::Close(string str)
+{
+    if (Head == NULL)
+        return;
+    char *file = (char *)malloc(sizeof(str.length()));
+    int i;
+    for (i = 0; i < str.length(); i++)
+    {
+        if (str.at(i) != ' ')
+            file[i] = str.at(i);
+    }
+    file[i] = '\0';
+    Connector *temp = this->Head;
+    if (CompareEqual(file, temp->fileName))
+    {
+        temp = temp->next;
+        Head->~Connector();
+        Head = temp;
+        this->size--;
+        return;
+    }
+    while (temp != NULL)
+    {
+        if (temp->next == NULL)
+            return;
+        if (this->CompareEqual(file, temp->next->fileName))
+        {
+            Connector *nt = temp->next->next;
+            temp->next->~Connector();
+            temp->next = nt;
+            this->size--;
+            return;
+        }
+        temp = temp->next;
+    }
+}
+
 // Deconstructs the Files i.e. closes them and frees memory
 FileHandler::~FileHandler()
 {
     CurLoc = Head;
     while (Head != NULL)
     {
-        if (Head->fileType) // out file
-            Head->outfile.close();
-        else
-            Head->infile.close();
-
-        free(Head->fileName);
-        Head = Head->next;
+        CurLoc = CurLoc->next;
+        Head->~Connector();
+        Head = CurLoc;
     }
+    size = 0;
 }
 
 //TODO: Find out if this can be private
@@ -100,10 +135,14 @@ void FileHandler::Output(string fileName, string outputStr)
         {
             DEBUG("Outputting to file");
             temp->outfile << outputStr;
+            if (i > 0)
+                free(file);
             return;
         }
         temp = temp->next;
     }
+    if (i > 0)
+        free(file);
 }
 
 // Finds out if their is the same file open if not adds it to the list

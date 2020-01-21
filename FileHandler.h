@@ -18,6 +18,7 @@ private:
 
 public:
     FileHandler();
+    void Close(string str);                       // Closes a specific file
     int AddFile(string str, int length, int out); // Adding File to list
     string CheckCurLoc();                         // Checks if the CurLoc is looking at a file that is EOF and changes it. Returns "" if no more files
     Connector *AccessCurLoc();

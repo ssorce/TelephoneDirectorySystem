@@ -60,12 +60,17 @@ void Scheduler(FileHandler *filehandler)
             getline(cin, str);
         }
         str = Choice(str, &catergory);
-        if (str.substr(0, 4).find("file") == 0)
+        if (str.substr(0, 5).find("close") == 0)
+        {
+            str = str.substr(6);
+            filehandler->Close(str);
+        }
+        else if (str.substr(0, 4).find("file") == 0)
         {
             str = str.substr(5);
             filehandler->AddFile(str, str.length(), 0);
         }
-        if (str.substr(0, 6).find("import") == 0)
+        else if (str.substr(0, 6).find("import") == 0)
         {
             str = str.substr(7);
             if (str.substr(0, 4).find("file") == 0)
@@ -77,7 +82,7 @@ void Scheduler(FileHandler *filehandler)
                 Separator("add", str.substr(3), filehandler, &catergory);
             }
         }
-        if (str.substr(0, 6).find("export") == 0)
+        else if (str.substr(0, 6).find("export") == 0)
         {
             if (str.length() < 7)
             {
@@ -133,6 +138,9 @@ string Choice(string str, int *catergory)
 {
     int i;
     DEBUG(str);
+    i = str.substr(0, 5).find("close");
+    if (i == 0)
+        return str;
     i = str.substr(0, 6).find("import");
     if (i == 0)
     {
@@ -177,7 +185,7 @@ string Choice(string str, int *catergory)
         TraverseTree(head);
         return str;
     }
-    i = str.find("add");
+    i = str.substr(0, 3).find("add");
     if (i == 0)
     {
         if (head == NULL)
