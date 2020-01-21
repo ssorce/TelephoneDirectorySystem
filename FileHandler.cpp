@@ -63,7 +63,8 @@ string FileHandler::CheckCurLoc()
     if (CurLoc != NULL)
     {
         getline(CurLoc->infile, str);
-        if (str.compare("exit") || str.compare("EXIT"))
+        i = str.substr(0, 4).compare("exit");
+        if (i == 0)
         {
             return CheckCurLoc();
         }
