@@ -104,25 +104,32 @@ void Separator(string expression, string str, FileHandler *filehandler, int *cat
 {
     int cur = 0;
     int content = 0; // Goes to true if at the end of the possible indexing
-    int temp = 0;
+    string temp = "";
+    str = str.substr(1);
     for (cur = 0; cur < str.length(); cur++)
     {
+        if (DEBUG)
+            cout << str.at(cur) << endl;
         if (str.at(cur) == '"')
         {
             content++;
-            if (content % 2)
-                temp = cur;
         }
-        if (content > 0 && !(content % 2) && expression.compare("file"))
+        else if (content == 1)
         {
-            filehandler->AddFile(str.substr((temp + 1), cur), str.substr((temp + 1), cur).length(), 0);
-            str = str.substr(cur);
-            temp = 0;
+            temp += str.at(cur);
         }
-        else if (content > 0 && !(content % 2) && expression.compare("add"))
+        else if (!expression.compare("file"))
         {
-            FindTree(head, str.substr((temp + 1), cur), *catergory);
-            str = str.substr(cur);
+            if (temp.length() > 0)
+                filehandler->AddFile(temp, temp.length(), 0);
+            content = 0;
+            temp = "";
+        }
+        else if (!(expression.compare("add")))
+        {
+            FindTree(head, temp, *catergory);
+            content = 0;
+            temp = "";
         }
     }
 }

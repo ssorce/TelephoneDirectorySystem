@@ -8,6 +8,5 @@ order first
 export
 order address
 add Z Y 00000000 0009 S Mandy Lane
-export test.txt
 file file.txt
 exit

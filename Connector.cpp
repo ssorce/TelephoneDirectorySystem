@@ -5,6 +5,7 @@ Connector::~Connector()
     free(this->fileName);
 }
 
+// May need to use realloc incase there is a space or non-filename character
 Connector::Connector(string str, int length, int out)
 {
     this->fileType = false;

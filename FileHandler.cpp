@@ -110,6 +110,8 @@ void FileHandler::Output(string fileName, string outputStr)
 // Finds out if their is the same file open if not adds it to the list
 int FileHandler::AddFile(string str, int length, int out)
 {
+    if (DEBUG)
+        cout << str << endl;
     Connector *file = new Connector(str, length, out);
     if (this->Head == NULL)
     {
