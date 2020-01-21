@@ -41,6 +41,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
+// This is tells other function what to do. By using the user or file input
 void Scheduler(FileHandler *filehandler)
 {
     string str = "temp";
@@ -189,12 +190,14 @@ string Choice(string str, int *catergory)
     return str;
 }
 
+// Goes through the head of the tree
 void TraverseTree(Node *hd)
 {
     Node *list = NULL;
     head = TraverseTreeHelper(hd, list);
 }
 
+// Changes the order of the tree based on the catergory
 Node *OrderTree(Node *old, int catergory)
 {
     old = TraverseTreeHelper(old, NULL);
@@ -208,6 +211,7 @@ Node *OrderTree(Node *old, int catergory)
     return hd;
 }
 
+// Using recursion to go through the hd to make the list
 Node *TraverseTreeHelper(Node *hd, Node *list)
 {
     if (hd != NULL)
@@ -230,6 +234,7 @@ Node *TraverseTreeHelper(Node *hd, Node *list)
     return list;
 }
 
+// Makes the the entire returnValue the values of the nodes
 string PrintList(Node *hd)
 {
     string returnValue = "";
@@ -243,6 +248,7 @@ string PrintList(Node *hd)
     return returnValue;
 }
 
+// Wheere the new node should be in the tree
 void FindTree(Node *hd, string str, int catergory)
 {
     Node *node = new Node(str);
@@ -270,6 +276,7 @@ void FindTree(Node *hd, string str, int catergory)
     return;
 }
 
+// Finds where the new node should be in the tree
 void FindTree(Node *hd, Node *str, int catergory)
 {
     Node *node = new Node(str);

@@ -1,13 +1,13 @@
 #include "FileHandler.h"
 extern int DEBUG;
-
+// Set the values to NULL
 FileHandler::FileHandler()
 {
     this->Head = NULL;
     this->CurLoc = NULL;
     this->size = 0;
 }
-
+// Comparator
 int FileHandler::CompareEqual(char *cmp, char *temp)
 {
     char *x = cmp;
@@ -22,11 +22,13 @@ int FileHandler::CompareEqual(char *cmp, char *temp)
     return 1;
 }
 
+// Moves CurLoc to the next CurLoc
 void FileHandler::ChangeCurLoc()
 {
     CurLoc = CurLoc->next;
 }
 
+// Deconstructs the Files i.e. closes them and frees memory
 FileHandler::~FileHandler()
 {
     CurLoc = Head;
@@ -42,6 +44,8 @@ FileHandler::~FileHandler()
     }
 }
 
+//TODO: Find out if this can be private
+// Accesses CurLoc
 Connector *FileHandler::AccessCurLoc()
 {
     return CurLoc;
@@ -68,6 +72,7 @@ string FileHandler::CheckCurLoc()
     return "";
 }
 
+// Checks if their is a file
 int FileHandler::hasFile()
 {
     if (this->CurLoc == NULL)
@@ -75,6 +80,7 @@ int FileHandler::hasFile()
     return 1;
 }
 
+// Outputs to filename, so it finds it in the list and uses outputStr
 void FileHandler::Output(string fileName, string outputStr)
 {
     Connector *temp = this->Head;
@@ -99,6 +105,7 @@ void FileHandler::Output(string fileName, string outputStr)
     }
 }
 
+// Finds out if their is the same file open if not adds it to the list
 int FileHandler::AddFile(string str, int length, int out)
 {
     Connector *file = new Connector(str, length, out);
