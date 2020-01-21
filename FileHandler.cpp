@@ -1,5 +1,5 @@
 #include "FileHandler.h"
-extern int DEBUG;
+#include "DEBUG.h"
 // Set the values to NULL
 FileHandler::FileHandler()
 {
@@ -98,8 +98,7 @@ void FileHandler::Output(string fileName, string outputStr)
     {
         if (CompareEqual(temp->fileName, file) && temp->fileType)
         {
-            if (DEBUG)
-                cout << "Outputting to file: " << outputStr << endl;
+            DEBUG("Outputting to file");
             temp->outfile << outputStr;
             return;
         }
@@ -110,8 +109,7 @@ void FileHandler::Output(string fileName, string outputStr)
 // Finds out if their is the same file open if not adds it to the list
 int FileHandler::AddFile(string str, int length, int out)
 {
-    if (DEBUG)
-        cout << str << endl;
+    DEBUG(str)
     Connector *file = new Connector(str, length, out);
     if (this->Head == NULL)
     {

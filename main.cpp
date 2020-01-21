@@ -15,7 +15,6 @@
 #include "DEBUG.h"
 
 using namespace std;
-extern int DEBUG;
 void FindTree(Node *hd, string str, int catergory);                                    // Finds where to add the data in the tree
 void FindTree(Node *hd, Node *str, int catergory);                                     // Finds where to add the data in the tree
 void TraverseTree(Node *hd);                                                           // Goes through the tree to make a singly linked list
@@ -52,13 +51,11 @@ void Scheduler(FileHandler *filehandler)
         str = filehandler->CheckCurLoc();
         if (str.compare("") != 0)
         {
-            if (DEBUG)
-                cout << "Str is from a file: " << str << endl;
+            DEBUG("Str is from a file");
         }
         else
         {
-            if (DEBUG)
-                cout << "User Input" << endl;
+            DEBUG("User Input")
             cout << ">> ";
             getline(cin, str);
         }
@@ -98,8 +95,6 @@ void Scheduler(FileHandler *filehandler)
 /*
     input: import file("text", "...") or import add("..", "....")
 */
-
-//TODO: Needs testing
 void Separator(string expression, string str, FileHandler *filehandler, int *catergory)
 {
     int cur = 0;
@@ -108,8 +103,7 @@ void Separator(string expression, string str, FileHandler *filehandler, int *cat
     str = str.substr(1);
     for (cur = 0; cur < str.length(); cur++)
     {
-        if (DEBUG)
-            cout << str.at(cur) << endl;
+        DEBUG(str.at(cur))
         if (str.at(cur) == '"')
         {
             content++;
@@ -127,7 +121,8 @@ void Separator(string expression, string str, FileHandler *filehandler, int *cat
         }
         else if (!(expression.compare("add")))
         {
-            FindTree(head, temp, *catergory);
+            if (temp.length() > 0)
+                FindTree(head, temp, *catergory);
             content = 0;
             temp = "";
         }
@@ -137,10 +132,7 @@ void Separator(string expression, string str, FileHandler *filehandler, int *cat
 string Choice(string str, int *catergory)
 {
     int i;
-    if (DEBUG)
-    {
-        cout << str << endl;
-    }
+    DEBUG(str);
     i = str.substr(0, 6).find("import");
     if (i == 0)
     {
@@ -245,8 +237,6 @@ Node *TraverseTreeHelper(Node *hd, Node *list)
 string PrintList(Node *hd)
 {
     string returnValue = "";
-    if (DEBUG)
-        cout << "First\tLast\tPhone\t\tAddress" << endl;
     while (hd != NULL)
     {
         returnValue += hd->getterFname() + "\t" + hd->getterLname() + "\t\'" + hd->getterPhone() + "\'\t\'" + hd->getterAddress() + "\'\n";

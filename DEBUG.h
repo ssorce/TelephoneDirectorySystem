@@ -1,4 +1,13 @@
+#include <iostream>
+#include <string>
+#include <stdio.h>
+
 #ifndef DEBUG_H
 #define DEBUG_H
-#include <iostream>
+#define RUN 1
+#define DEBUG(...)                                                                    \
+    if ((int)RUN)                                                                     \
+        cout << "\nDEBUG INFO:\nLINE: " << __LINE__ << "\nFILE: " << __FILE__ << "\nINPUT: " \
+             << __VA_ARGS__ << "\nEnd of DEBUG INFO\n\n";
+
 #endif // !DEBUG_H
