@@ -258,6 +258,13 @@ string PrintList(Node *hd)
 void FindTree(Node *hd, string str, int catergory)
 {
     Node *node = new Node(str);
+    FindTree(hd, node, catergory);
+}
+
+// Finds where the new node should be in the tree
+void FindTree(Node *hd, Node *str, int catergory)
+{
+    Node *node = new Node(str);
     int i;
     while (hd != NULL)
     {
@@ -285,34 +292,9 @@ void FindTree(Node *hd, string str, int catergory)
             {
                 node->right = hd->right;
             }
-            hd->right = node;
-            return;
-        }
-        else if (i > 0)
-            hd = hd->left;
-        else
-        {
-            hd = hd->right;
-        }
-    }
-    return;
-}
-
-// Finds where the new node should be in the tree
-void FindTree(Node *hd, Node *str, int catergory)
-{
-    Node *node = new Node(str);
-    int i;
-    while (hd != NULL)
-    {
-        i = hd->getCatergory(catergory).compare(node->getCatergory(catergory));
-        if (i > 0 && hd->left == NULL)
-        {
-            hd->left = node;
-            return;
-        }
-        else if (i < 0 && hd->right == NULL)
-        {
+            else
+            {
+            }
             hd->right = node;
             return;
         }
