@@ -27,7 +27,7 @@ void Separator(string expression, string x, FileHandler *filehandler, int *cater
 /*
     This is a directory with phone, addresses, first and last name. Accessible in different forms.
     Can add, update, and delete records. Have the ability to export to a file or stdout.
-    Exits is only when exit is inputed.
+    Exits is only when exit is inputted.
 */
 
 Node *tail = NULL; // Tail of the list
