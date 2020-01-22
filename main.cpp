@@ -15,7 +15,7 @@
 #include "DEBUG.h"
 
 using namespace std;
-void FindTree(Node *hd, string str, int catergory);                                    // Finds where to add the data in the tree
+void FindTree(Node *hd, string str, int catergory);                                    // Uses OVERLOAD:Finds where to add the data in the tree
 void FindTree(Node *hd, Node *str, int catergory);                                     // Finds where to add the data in the tree
 void TraverseTree(Node *hd);                                                           // Goes through the tree to make a singly linked list
 Node *TraverseTreeHelper(Node *hd, Node *list);                                        // Makes the singly linked list
