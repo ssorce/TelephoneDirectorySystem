@@ -61,5 +61,5 @@ string Node::getCatergory(int catergory)
     else if (catergory == 2)
         return this->getterFname();
     else
-        return this->getterLname();
+        return this->getterLname(); // Default Ordering
 }
