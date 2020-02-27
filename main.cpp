@@ -45,7 +45,7 @@ void Scheduler(FileHandler *filehandler)
 {
     string str = "temp";
     string temp = "";
-    int catergory = 3;
+    int catergory = 3; // Default Ordering Last Name
     while (str.compare("EXIT") != 0)
     {
         str = filehandler->CheckCurLoc();
@@ -278,7 +278,7 @@ void FindTree(Node *hd, Node *str, int catergory)
             hd->right = node;
             return;
         }
-        else if (i == 0) 
+        else if (i == 0)
         {
             for (i = 0; i < 4; i++)
             {
