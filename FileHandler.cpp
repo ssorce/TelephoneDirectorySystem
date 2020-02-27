@@ -79,7 +79,6 @@ FileHandler::~FileHandler()
     size = 0;
 }
 
-//TODO: Find out if this can be private
 // Accesses CurLoc
 Connector *FileHandler::AccessCurLoc()
 {
