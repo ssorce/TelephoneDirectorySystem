@@ -2,7 +2,7 @@
 
 Connector::~Connector()
 {
-    if(this->fileType)
+    if (this->fileType)
         this->infile.close();
     else
         this->outfile.close();
