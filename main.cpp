@@ -205,7 +205,6 @@ void TraverseTree(Node *hd)
 }
 
 // Changes the order of the tree based on the catergory
-// TODO: Have to get it to make a tree based on the similar information
 Node *OrderTree(Node *old, int catergory)
 {
     old = TraverseTreeHelper(old, NULL);
@@ -279,7 +278,7 @@ void FindTree(Node *hd, Node *str, int catergory)
             hd->right = node;
             return;
         }
-        else if (i == 0) // TODO: This may not work in all cases, needs testing
+        else if (i == 0) 
         {
             for (i = 0; i < 4; i++)
             {

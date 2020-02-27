@@ -8,6 +8,6 @@
 #define DEBUG(...)                                                                           \
     if ((int)RUN)                                                                            \
         cout << "\nDEBUG INFO:\nLINE: " << __LINE__ << "\nFILE: " << __FILE__ << "\nINPUT: " \
-             << __VA_ARGS__ << "\nEnd of DEBUG INFO\n\n";
+             << __VA_ARGS__ << "\nEND OF DEBUG INFO\n\n";
 
 #endif // !DEBUG_H
