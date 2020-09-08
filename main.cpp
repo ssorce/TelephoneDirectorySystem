@@ -28,6 +28,8 @@ void Separator(string expression, string x, FileHandler *filehandler, int *cater
     This is a directory with phone, addresses, first and last name. Accessible in different forms.
     Can add, update, and delete records. Have the ability to export to a file or stdout.
     Exits is only when exit is inputted.
+
+    "Help" command has been added to list off the possible commands and what commands look like
 */
 
 Node *tail = NULL; // Tail of the list
@@ -60,7 +62,15 @@ void Scheduler(FileHandler *filehandler)
             getline(cin, str);
         }
         str = Choice(str, &catergory);
-        if (str.substr(0, 5).find("close") == 0)
+        // List off commands
+        if (str.substr(0, 4).find("HELP") == 0)
+        {
+            cout << "Possible commands are:\nclose - which closes a file (close [filename])\n"
+                 << "file - adds a file (file [filename])\nimport - does a repeated task (only for file and add)"
+                 << "(import [action](\"[context]\"))\nexport - gets it ready to be exported to a file if no file STDOUT"
+                 << "(export [file])\nadd - adds new information (add [first] [last] [number] [address])\n";
+        }
+        else if (str.substr(0, 5).find("close") == 0)
         {
             str = str.substr(6);
             filehandler->Close(str);
